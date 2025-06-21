@@ -1,0 +1,31 @@
+name: Voice Bot Runner
+
+on:
+  schedule:
+    # Segunda a quinta às 16h (UTC = 13h no Brasil)
+    - cron: "0 13 * * 1-4"
+    # Sexta às 16h (UTC)
+    - cron: "0 13 * * 5"
+  workflow_dispatch: # permite rodar manualmente também
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 540  # 9h (16h → 1h)
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Executar bot
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          FRIEND_IDS: ${{ secrets.FRIEND_IDS }}
+        run: python bot.py
