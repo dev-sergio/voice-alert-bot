@@ -2,10 +2,8 @@ name: Voice Bot Runner
 
 on:
   schedule:
-    # Segunda a quinta às 16h (UTC = 13h no Brasil)
-    - cron: "0 13 * * 1-4"
-    # Sexta às 16h (UTC)
-    - cron: "0 13 * * 5"
+    - cron: "0 21 * * 1-5"  # seg a sex às 18h BRT
+    - cron: "0 3 * * 6,0"   # sábado e domingo às 00h BRT
   workflow_dispatch: # permite rodar manualmente também
 
 jobs:

@@ -15,7 +15,13 @@ intents.voice_states = True
 
 client = discord.Client(intents=intents)
 
-DESLIGAR_DEPOIS = 8  # horas
+now = datetime.now()
+weekday = now.weekday()  # segunda = 0, domingo = 6
+
+if weekday in [5, 6]:  # sábado ou domingo
+    DESLIGAR_DEPOIS = 24
+else:
+    DESLIGAR_DEPOIS = 6
 
 @client.event
 async def on_ready():
