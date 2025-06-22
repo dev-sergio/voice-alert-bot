@@ -9,7 +9,7 @@ on:
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    timeout-minutes: 540  # 9h (16h → 1h)
+    timeout-minutes: 1440
     steps:
       - name: Clonar repositório
         uses: actions/checkout@v3
